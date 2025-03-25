@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel = "stylesheet" href = "styles.css">
+</head>
+<body>
+    <header>
+        <select id = "opcao" onchange = "redirecionar()">
+            <option value = "">Escolha uma Atividade</option>
+            <option value = "https://alexandreschimaindastempinhaki.github.io/11-03-2025/">Atividade 1</option>
+            <option value = "https://alexandreschimaindastempinhaki.github.io/18-03-2025/">Atividade 2</option>
+        </select>
+    </header>
+    <h1>ALEXANDRE SCHIMAINDA STEMPINHAKI</h1>
+    <script>
+        function redirecionar(){
+            let opcao = document.getElementById("opcao").value;
+            if(opcao){
+                window.open(opcao, "_blank");
+                document.getElementById("opcao").selectedIndex = 0;
+            }
+        }
+    </script>
+</body>
+</html>
