@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel = "stylesheet" href = "styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <select id = "opcao" onchange = "redirecionar()">
-            <option value = "">Escolha uma Atividade</option>
-            <option value = "">Atividade 1</option>
-            <option value = "">Atividade 2</option>
-            <option value = "">Atividade 3</option>
+        <select id="opcao" onchange="redirecionar()">
+            <option value="">Atividades</option>
+            <option value="Atividade 1/Curriculo.html">Atividade 1</option>
+            <option value="Atividade 2/Home.html">Atividade 2</option>
+            <option value="atividade3.html">Atividade 3</option>
+            <option value="atividade4.html">Atividade 4</option>
         </select>
     </header>
-    <h1>DAVI MARCELINO</h1>
+    <div class="nome-container">
+        <img src="cavalo.png" alt="Cavalo Esquerda" class="cavalo">
+        <h1>DAVI MARCELINO</h1>
+        <img src="cavalo.png" alt="Cavalo Direita" class="cavalo direita">
+    </div>
     <script>
-        function redirecionar(){
+        function redirecionar() {
             let opcao = document.getElementById("opcao").value;
-            if(opcao){
+            if (opcao) {
                 window.open(opcao, "_blank");
                 document.getElementById("opcao").selectedIndex = 0;
             }
