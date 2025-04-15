@@ -1,18 +1,15 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-h1 {
-    text-align: center;
+.block {
+    transition: all 0.3s ease;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
+.circle {
+    border-radius: 50%;
+}
+
+.size {
+    transition: width 0.3s ease, height 0.3s ease;
 }

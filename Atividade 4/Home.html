@@ -1,18 +1,64 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Simulador Flexbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="background"></div>
-    <h1>Is Not Found!</h1>
-    <img src="cavalo.png" alt="Cavalo">
+<body class="bg-gray-200 h-screen">
+    <div class="h-full flex">
+        <div class="w-64 p-4 bg-gray-400">
+            <h2 class="text-lg font-bold mb-4">SIMULADOR Flexbox</h2>
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Preenchimento</h3>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="w-8 h-8 bg-purple-400 border border-gray-500 color-option"></div>
+                    <div class="w-8 h-8 bg-red-400 border border-gray-500 color-option"></div>
+                    <div class="w-8 h-8 bg-blue-400 border border-gray-500 color-option"></div>
+                    <div class="w-8 h-8 bg-yellow-200 border border-gray-500 color-option"></div>
+                    <div class="w-8 h-8 bg-orange-400 border border-gray-500 color-option"></div>
+                    <div class="w-8 h-8 bg-green-400 border border-gray-500 color-option"></div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Formato</h3>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-purple-400 border border-gray-500 mr-2 shape-option"></div>
+                    <div class="w-8 h-8 bg-purple-400 rounded-full border border-gray-500 shape-option"></div>
+                </div>
+            </div>
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Tamanho</h3>
+                <input type="text" id="sizeInput" class="w-full p-2 border border-gray-500" value="140">
+            </div>
+            <div class="mb-4">
+                <h3 class="font-semibold mb-2">Alinhamento</h3>
+                <select id="flexDirection" class="w-full p-2 mb-2 border border-gray-500">
+                    <option value="flex-row">FLEX-DIRECTION</option>
+                    <option value="flex-col">Column</option>
+                </select>
+                <select id="justifyContent" class="w-full p-2 mb-2 border border-gray-500">
+                    <option value="justify-start">JUSTIFY-CONTENT</option>
+                    <option value="justify-center">Center</option>
+                    <option value="justify-end">End</option>
+                </select>
+                <select id="alignItems" class="w-full p-2 border border-gray-500">
+                    <option value="items-start">ALIGN-ITEMS</option>
+                    <option value="items-center">Center</option>
+                    <option value="items-end">End</option>
+                </select>
+            </div>
+        </div>
+        <div id="blocksContainer" class="w-3/4 p-4 flex space-x-4 items-center justify-center">
+            <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">1</div>
+            <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">2</div>
+            <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">3</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
