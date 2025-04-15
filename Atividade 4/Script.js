@@ -8,30 +8,30 @@ const alignItemsSelect = document.getElementById('alignItems');
 const blocksContainer = document.getElementById('blocksContainer');
 
 let selectedColor = '';
+
 colorOptions.forEach(option => {
     option.addEventListener('click', () => {
         selectedColor = getComputedStyle(option).backgroundColor;
         blocks.forEach(block => {
             block.style.backgroundColor = selectedColor;
         });
-        shapeOptions.forEach(option => {
-            option.style.backgroundColor = selectedColor;
-        });
         colorOptions.forEach(opt => opt.style.border = 'none');
         option.style.border = '2px solid black';
     });
 });
+
 shapeOptions.forEach(option => {
     option.addEventListener('click', () => {
         const isCircle = option.classList.contains('rounded-full');
         blocks.forEach(block => {
-            block.classList.toggle('circle', isCircle);
+            block.style.borderRadius = isCircle ? '50%' : '0';
             block.style.backgroundColor = selectedColor;
         });
         shapeOptions.forEach(opt => opt.style.border = 'none');
         option.style.border = '2px solid black';
     });
 });
+
 sizeInput.addEventListener('keypress', (event) => {
     if (event.key === 'Enter') {
         const size = sizeInput.value + 'px';
@@ -41,13 +41,16 @@ sizeInput.addEventListener('keypress', (event) => {
         });
     }
 });
+
 flexDirectionSelect.addEventListener('change', () => {
-    blocksContainer.className = `w-3/4 p-4 flex space-x-4 items-center justify-center ${flexDirectionSelect.value}`;
+    blocksContainer.className = `w-3/4 p-4 flex ${flexDirectionSelect.value} space-x-4 items-center justify-center`;
 });
+
 justifyContentSelect.addEventListener('change', () => {
     blocksContainer.classList.remove(...['justify-start', 'justify-center', 'justify-end']);
     blocksContainer.classList.add(justifyContentSelect.value);
 });
+
 alignItemsSelect.addEventListener('change', () => {
     blocksContainer.classList.remove(...['items-start', 'items-center', 'items-end']);
     blocksContainer.classList.add(alignItemsSelect.value);

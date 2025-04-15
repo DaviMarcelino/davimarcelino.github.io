@@ -2,14 +2,18 @@ body {
     font-family: Arial, sans-serif;
 }
 
+h1, h2, h3 {
+    color: #333;
+}
+
+.color-option {
+    cursor: pointer;
+}
+
+.shape-option {
+    cursor: pointer;
+}
+
 .block {
-    transition: all 0.3s ease;
-}
-
-.circle {
-    border-radius: 50%;
-}
-
-.size {
-    transition: width 0.3s ease, height 0.3s ease;
+    transition: background-color 0.3s, border-radius 0.3s;
 }
