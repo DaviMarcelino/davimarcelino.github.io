@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/game.css">
+    <title>Memory Game</title>
+</head>
+
+<body>
+    <h1>PLAY NOW</h1>
+
+    <div class="displaycards">
+        <div class="cards">
+            <img class="cover" src="imagens/dutch.png" alt="Imagem de Dutch van der linde" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/jonh.png" alt="Imagem de John Marston" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/javier.png" alt="imagem de Javier Esculla" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/sadie.png" alt="Imagem de Sadie" onclick="showHide(this);" onclick="showHide(this);">
+        </div>
+    </div>
+    <div class="displaycards">
+        <div class="cards">
+            <img class="cover" src="imagens/arthur.png" alt="Imagem de Arthur Morgan" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/hosea.png" alt="Imagem de Hosea Matthews" onclick="showHide(this);" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/micah.png" alt="Imagem de Micah Bell" onclick="showHide(this);" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/charles.png" alt="Imagem de Charles Smith" onclick="showHide(this);">
+        </div>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    function showHide(card){
+
+        if(card.style.opacity == 0){
+            card.style.opacity = 1
+        }
+        else{
+            card.style.opacity = 0
+        }
+    }
+</script>

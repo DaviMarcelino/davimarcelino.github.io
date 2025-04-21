@@ -1,0 +1,47 @@
+body {
+    background-image: linear-gradient(to right, #818181, #333232);
+    margin: 0;
+    padding: 0;
+    font-family: Georgia;
+}
+
+.corpo {
+    background-color: #ffffff;
+    height: 525px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.name {
+    position: relative;
+    top: 25px;
+    text-align: center;
+    font-size: 40px;
+    color: #000000;
+    text-shadow: 4px 4px 3px rgb(59, 59, 59);
+}
+
+.icon {
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+}
+
+.cover {
+    height: 280px;
+    width: 250px;
+    border-radius: 50px;
+    box-shadow: 15px 15px 6px #000000;
+}
+.cover:hover{
+    height: 284px;
+    width: 254px;
+}
+.cardsiniciais {
+    display: inline-block;
+    padding: 70px;
+}

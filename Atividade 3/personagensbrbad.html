@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/game.css">
+    <title>Memory Game</title>
+</head>
+
+<body>
+    <h1>PLAY NOW</h1>
+
+    <div class="displaycards">
+        <div class="cards">
+            <img class="cover" src="imagens/heisenberg.png" alt="Imagem de Walter White" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/gus.jpeg" alt="Imagem de Gus Fring" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica3.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+    </div>
+    <div class="displaycards">
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica2.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica4.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica4.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+        <div class="cards">
+            <img class="cover" src="imagens/turmadamonica3.jpg" alt="carta para baralho de Turma da Mônica" onclick="showHide(this);">
+        </div>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript">
+
+    function showHide(card){
+
+        if(card.style.opacity == 0){
+            card.style.opacity = 1
+        }
+        else{
+            card.style.opacity = 0
+        }
+    }
+</script>
