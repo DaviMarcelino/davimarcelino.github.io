@@ -17,6 +17,11 @@ colorOptions.forEach(option => {
         });
         colorOptions.forEach(opt => opt.style.border = 'none');
         option.style.border = '2px solid black';
+
+        // Atualiza a cor dos botões de formato
+        shapeOptions.forEach(shapeOption => {
+            shapeOption.style.backgroundColor = selectedColor;
+        });
     });
 });
 
@@ -47,7 +52,7 @@ flexDirectionSelect.addEventListener('change', () => {
 });
 
 justifyContentSelect.addEventListener('change', () => {
-    blocksContainer.classList.remove(...['justify-start', 'justify-center', 'justify-end']);
+    blocksContainer.classList.remove(...['justify-start', 'justify-center', 'justify-end', 'justify-between', 'justify-evenly', 'justify-around']);
     blocksContainer.classList.add(justifyContentSelect.value);
 });
 

@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="mb-4">
-                <h3 class="font-semibold mb-2">Formato</h3>
+ <h3 class="font-semibold mb-2">Formato</h3>
                 <div class="flex items-center">
                     <div class="w-8 h-8 bg-purple-400 border border-gray-500 mr-2 shape-option"></div>
                     <div class="w-8 h-8 bg-purple-400 rounded-full border border-gray-500 shape-option"></div>
@@ -33,21 +33,29 @@
             </div>
             <div class="mb-4">
                 <h3 class="font-semibold mb-2">Tamanho</h3>
-                <input type="text" id="sizeInput" class="w-full p-2 border border-gray-500" value="140">
+                <input type="text" id="sizeInput" class="w-full p-2 border border-gray-500" value="150">
             </div>
             <div class="mb-4">
                 <h3 class="font-semibold mb-2">Alinhamento</h3>
                 <select id="flexDirection" class="w-full p-2 mb-2 border border-gray-500">
                     <option value="flex-row">FLEX-DIRECTION</option>
+                    <option value="flex-row">Row</option>
                     <option value="flex-col">Column</option>
+                    <option value="flex-row-reverse">Row Reverse</option>
+                    <option value="flex-col-reverse">Column Reverse</option>
                 </select>
                 <select id="justifyContent" class="w-full p-2 mb-2 border border-gray-500">
                     <option value="justify-start">JUSTIFY-CONTENT</option>
+                    <option value="justify-start">Start</option>
                     <option value="justify-center">Center</option>
                     <option value="justify-end">End</option>
+                    <option value="justify-between">Space Between</option>
+                    <option value="justify-evenly">Space Evenly</option>
+                    <option value="justify-around">Space Around</option>
                 </select>
                 <select id="alignItems" class="w-full p-2 mb-2 border border-gray-500">
                     <option value="items-start">ALIGN-ITEMS</option>
+                    <option value="items-start">Start</option>
                     <option value="items-center">Center</option>
                     <option value="items-end">End</option>
                 </select>
