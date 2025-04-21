@@ -10,19 +10,46 @@
 </head>
 
 <body>
-    <img src="imagens\cavalo.png" class="icon">
+    <img src="imagens/cavalo.png" class="icon">
     <h1 class="name">MEMORY GAME</h1>
-
     <div class="corpo">
-       <div class="cardsiniciais">
-        <a href="personagensgot.html"><img class="cover" src="imagens\capagot.jpeg" alt="capa de Game of Thrones"></a>
-       </div>
-       <div class="cardsiniciais">
-        <a href="personagenrdr2.html"><img class="cover" src="imagens/capardr2.jpg" alt="capa de Red Dead Redemption 2"></a>
-       </div>
-       <div class="cardsiniciais">
-        <a href="personagensbrbad.html"><img class="cover" src="imagens/capabrbad.jpg" alt="capa de Breaking Bad"></a>
-       </div>
+        <div class="cardsiniciais">
+            <a href="personagensgot.html" 
+               onmouseover="mostranome('characters from Game of Thrones')" 
+               onmouseout="escondenome()">
+                <img class="cover" src="imagens/capagot.jpeg" alt="capa de Game of Thrones">
+            </a>
+        </div>
+        <div class="card-container">
+            <h2 id="textoquemuda" class="text">a</h2>
+            <div class="cardsiniciais">
+                <a href="personagenrdr2.html" 
+                   onmouseover="mostranome('characters from Red Dead Redemption 2')" 
+                   onmouseout="escondenome()">
+                    <img class="cover" src="imagens/capardr2.jpg" alt="capa de Red Dead Redemption 2">
+                </a>
+            </div>
+        </div>
+        <div class="cardsiniciais">
+            <a href="personagensbrbad.html" 
+               onmouseover="mostranome('characters from Breaking Bad')" 
+               onmouseout="escondenome()">
+                <img class="cover" src="imagens/capabrbad.jpg" alt="capa de Breaking Bad">
+            </a>
+        </div>
     </div>
+
+    <script>
+        function mostranome(nome) {
+            const novo_nome = document.getElementById('textoquemuda');
+            novo_nome.innerText = nome;
+            novo_nome.style.visibility = 'visible';
+        }
+
+        function escondenome() {
+            const nome = document.getElementById('textoquemuda');
+            nome.style.visibility = 'hidden';
+        }
+    </script>
 </body>
 </html>

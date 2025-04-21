@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right, #818181, #333232);
+    background-image: linear-gradient(to right, #929191, #3d3d3d);
     margin: 0;
     padding: 0;
     font-family: Georgia;
@@ -15,7 +15,7 @@ body {
 
 .name {
     position: relative;
-    top: 25px;
+    top: 0px;
     text-align: center;
     font-size: 40px;
     color: #000000;
@@ -24,8 +24,8 @@ body {
 
 .icon {
     position: absolute;
-    top: 20px;
-    left: 10px;
+    top: 15px;
+    left: 15px;
     height: 70px;
     width: 70px;
     border-radius: 100%;
@@ -37,11 +37,33 @@ body {
     border-radius: 50px;
     box-shadow: 15px 15px 6px #000000;
 }
-.cover:hover{
+
+.cover:hover {
     height: 284px;
     width: 254px;
 }
+
 .cardsiniciais {
     display: inline-block;
-    padding: 70px;
+    padding: 20px;
+}
+
+.card-container {
+    position: relative;
+    display: inline-block;
+    padding: 110px; 
+}
+
+.text {
+    font-family: Georgia;
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 25px;
+    color: black; 
+    text-align: center; 
+    visibility: hidden;
+    text-shadow: 4px 4px 3px rgb(194, 191, 191);
+    white-space: nowrap;
 }
