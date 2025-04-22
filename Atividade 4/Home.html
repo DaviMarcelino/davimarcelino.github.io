@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="mb-4">
- <h3 class="font-semibold mb-2">Formato</h3>
+                <h3 class="font-semibold mb-2">Formato</h3>
                 <div class="flex items-center">
                     <div class="w-8 h-8 bg-purple-400 border border-gray-500 mr-2 shape-option"></div>
                     <div class="w-8 h-8 bg-purple-400 rounded-full border border-gray-500 shape-option"></div>
@@ -60,13 +60,75 @@
                     <option value="items-end">End</option>
                 </select>
             </div>
-        </div>
+ </div>
         <div id="blocksContainer" class="w-3/4 p-4 flex space-x-4 items-center justify-center">
             <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">1</div>
             <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">2</div>
             <div class="w-36 h-36 bg-purple-400 flex items-center justify-center text-3xl font-bold border border-gray-500 block">3</div>
         </div>
     </div>
-    <script src="script.js"></script>
+    <script>
+        const colorOptions = document.querySelectorAll('.color-option');
+        const shapeOptions = document.querySelectorAll('.shape-option');
+        const blocks = document.querySelectorAll('.block');
+        const sizeInput = document.getElementById('sizeInput');
+        const flexDirectionSelect = document.getElementById('flexDirection');
+        const justifyContentSelect = document.getElementById('justifyContent');
+        const alignItemsSelect = document.getElementById('alignItems');
+        const blocksContainer = document.getElementById('blocksContainer');
+
+        let selectedColor = '';
+
+        colorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                selectedColor = getComputedStyle(option).backgroundColor;
+                blocks.forEach(block => {
+                    block.style.backgroundColor = selectedColor;
+                });
+                colorOptions.forEach(opt => opt.style.border = 'none');
+                option.style.border = '2px solid black';
+
+                shapeOptions.forEach(shapeOption => {
+                    shapeOption.style.backgroundColor = selectedColor;
+                });
+            });
+        });
+
+        shapeOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const isCircle = option.classList.contains('rounded-full');
+                blocks.forEach(block => {
+                    block.style.borderRadius = isCircle ? '50%' : '0';
+                    block.style.backgroundColor = selectedColor;
+                });
+                shapeOptions.forEach(opt => opt.style.border = 'none');
+                option.style.border = '2px solid black';
+            });
+        });
+
+        sizeInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                const size = sizeInput.value + 'px';
+                blocks.forEach(block => {
+                    block.style.width = size;
+                    block.style.height = size;
+                });
+            }
+        });
+
+        flexDirectionSelect.addEventListener('change', () => {
+            blocksContainer.className = `w-3/4 p-4 flex ${flexDirectionSelect.value} space-x-4 items-center justify-center`;
+        });
+
+        justifyContentSelect.addEventListener('change', () => {
+            blocksContainer.classList.remove(...['justify-start', 'justify-center', 'justify-end', 'justify-between', 'justify-evenly', 'justify-around']);
+            blocksContainer.classList.add(justifyContentSelect.value);
+        });
+
+        alignItemsSelect.addEventListener('change', () => {
+            blocksContainer.classList.remove(...['items-start', 'items-center', 'items-end']);
+            blocksContainer.classList.add(alignItemsSelect.value);
+        });
+    </script>
 </body>
 </html>
