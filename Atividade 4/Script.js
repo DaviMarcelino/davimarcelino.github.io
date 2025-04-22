@@ -18,7 +18,6 @@ colorOptions.forEach(option => {
         colorOptions.forEach(opt => opt.style.border = 'none');
         option.style.border = '2px solid black';
 
-        // Atualiza a cor dos botões de formato
         shapeOptions.forEach(shapeOption => {
             shapeOption.style.backgroundColor = selectedColor;
         });
