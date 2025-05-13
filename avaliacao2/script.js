@@ -8,6 +8,7 @@ let maxPhases = 4;
 let player = document.getElementById("player");
 let rockets = document.querySelectorAll(".rocketObj");
 let rocketLaunched = [false, false];
+let rocketIntervals = [null, null];
 let leftPosition = 50;
 
 const timerElement = document.getElementById("timer");
@@ -29,8 +30,7 @@ function startTimer() {
       const horas = Math.floor(segundos / 3600);
       const minutos = Math.floor((segundos % 3600) / 60);
       const segundosRestantes = segundos % 60;
-      timerElement.textContent =
-        `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundosRestantes).padStart(2, '0')}`;
+      timerElement.textContent = `${String(horas).padStart(2, '0')}:${String(minutos).padStart(2, '0')}:${String(segundosRestantes).padStart(2, '0')}`;
     }
   }, 1000);
 }
@@ -66,17 +66,16 @@ function shootRocket() {
   rocket.style.display = "block";
   let bottom = 90;
 
-  const interval = setInterval(() => {
+  rocketIntervals[index] = setInterval(() => {
     if (gamePaused) return;
 
     bottom += 2;
     rocket.style.bottom = bottom + "px";
 
     if (bottom > window.innerHeight) {
-      clearInterval(interval);
-      resetRocket(index);
+      clearInterval(rocketIntervals[index]);
+      checkMissileReset(index);
     } else {
-      // check collision
       document.querySelectorAll(".enemy").forEach(enemy => {
         const eRect = enemy.getBoundingClientRect();
         const rRect = rocket.getBoundingClientRect();
@@ -87,20 +86,34 @@ function shootRocket() {
           rRect.bottom > eRect.top
         ) {
           enemy.remove();
-          clearInterval(interval);
-          resetRocket(index);
+          clearInterval(rocketIntervals[index]);
           enemiesKilled++;
           aliensElement.textContent = `ALIEN: ${enemiesKilled}`;
           checkPhaseProgress();
+          checkMissileReset(index);
         }
       });
     }
   }, 10);
 }
 
+function checkMissileReset(index) {
+  if (rocketLaunched.every(val => val)) {
+    resetBothRockets();
+  } else {
+    resetRocket(index);
+  }
+}
+
 function resetRocket(index) {
+  clearInterval(rocketIntervals[index]);
+  rocketIntervals[index] = null;
   rockets[index].style.bottom = "90px";
   rocketLaunched[index] = false;
+}
+
+function resetBothRockets() {
+  rocketLaunched.forEach((_, index) => resetRocket(index));
 }
 
 function spawnEnemies() {
@@ -126,9 +139,24 @@ function moveEnemy(enemy) {
     top += speed;
     enemy.style.top = top + "px";
 
-    if (top > window.innerHeight - 100) {
+    // Detecção de colisão com o jogador
+    const enemyRect = enemy.getBoundingClientRect();
+    const playerRect = player.getBoundingClientRect();
+    if (
+      enemyRect.bottom >= playerRect.top &&
+      enemyRect.top <= playerRect.bottom &&
+      enemyRect.right >= playerRect.left &&
+      enemyRect.left <= playerRect.right
+    ) {
       clearInterval(interval);
+      enemy.remove();
       loseLife();
+      return;
+    }
+
+    if (top > window.innerHeight) {
+      clearInterval(interval);
+      enemy.remove();
     }
   }, 20);
 }
@@ -152,7 +180,7 @@ function loseLife() {
 }
 
 function checkPhaseProgress() {
-  if (enemiesKilled % 3 === 0) {
+  if (enemiesKilled % 3 === 0 && enemiesKilled > 0) {
     if (currentPhase < maxPhases) {
       currentPhase++;
       changeBackground();
@@ -164,8 +192,7 @@ function checkPhaseProgress() {
 }
 
 function changeBackground() {
-  let bgExtension = currentPhase === 1 ? 'png' : 'jpg';
-  document.body.style.backgroundImage = `url(images/background${currentPhase}.${bgExtension})`;
+  document.body.style.backgroundImage = `url(images/background${currentPhase}.${currentPhase === 1 ? 'png' : 'jpg'})`;
 }
 
 function endGame(victory) {
