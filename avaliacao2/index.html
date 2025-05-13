@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body onload="playerMovement()">
+    <main>
+        <div class="stats">
+            <div class="statsleft">
+                <img class="statsimg" src="images/clock.png" alt="">
+                <img class="statsimg" src="images/nave.png" alt="">
+                <img class="statsimg" src="images/alien.png" alt="">
+            </div>
+            
+            <div class="statsright">
+                <span ><div id="timer">00:00:00</div></span>
+                <span id="">LIFE: 3</span>
+                <span id="">ALIEN: 0</span>
+            </div>
+        </div>
+
+        <div id="player">
+            <span id="rocketObj"><img class="rocket" src="images/missil.png" alt=""></span>
+            <img class="playerimg" src="images/nave.png" alt="">
+            <span id="rocketObj"><img class="rocket" src="images/missil.png" alt=""></span>
+        </div>
+    </main>
+</body>
+<script src="./script.js"></script>
+</html>
