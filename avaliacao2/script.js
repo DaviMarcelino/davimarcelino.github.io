@@ -5,9 +5,14 @@ let gamePaused = false;
 let lives = 3;
 let enemiesKilled = 0;
 let currentPhase = 1;
-let maxPhases = 4;
-let enemySpeed = 0.3;
-let enemyInterval = 2000;
+const maxPhases = 4;
+let enemySpeed = 1;
+let enemyInterval;
+
+// Configurações de tamanho
+const PLAYER_SIZE = 100;
+const ENEMY_SIZE = 90;
+const ENEMY_SPACING = 150;
 
 // Elementos DOM
 const timerElement = document.getElementById("timer");
@@ -22,7 +27,7 @@ const rockets = {
 };
 
 // Configurações de movimento
-const velocidade = 0.75;
+const velocidade = 1;
 let posicaoNave = 50;
 const limiteEsquerda = 5;
 const limiteDireita = 95;
@@ -35,6 +40,7 @@ const alturaDeRepouso = 6;
 const alturaMaxima = 87;
 
 function initGame() {
+  document.body.style.backgroundImage = 'url("images/background1.jpg")';
   document.addEventListener('keydown', handleInput);
   startTimer();
   spawnEnemies();
@@ -61,38 +67,24 @@ function handleInput(e) {
       posicaoNave -= velocidade;
       player.style.left = `${posicaoNave}%`;
       
-      // Atualiza posição dos mísseis quando não estão ativos
-      if (!missilEsqAtivo) {
-        rockets.left.style.left = `${posicaoNave + 0.5}%`;
-      }
-      if (!missilDirAtivo) {
-        rockets.right.style.left = `${posicaoNave + 5.1}%`;
-      }
+      if (!missilEsqAtivo) rockets.left.style.left = `${posicaoNave + 0.5}%`;
+      if (!missilDirAtivo) rockets.right.style.left = `${posicaoNave + 5.1}%`;
     }
   } else if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
     if (posicaoNave < limiteDireita) {
       posicaoNave += velocidade;
       player.style.left = `${posicaoNave}%`;
       
-      // Atualiza posição dos mísseis quando não estão ativos
-      if (!missilEsqAtivo) {
-        rockets.left.style.left = `${posicaoNave + 0.5}%`;
-      }
-      if (!missilDirAtivo) {
-        rockets.right.style.left = `${posicaoNave + 5.1}%`;
-      }
+      if (!missilEsqAtivo) rockets.left.style.left = `${posicaoNave + 0.5}%`;
+      if (!missilDirAtivo) rockets.right.style.left = `${posicaoNave + 5.1}%`;
     }
   }
 
   // Disparo de mísseis
-  if (e.code === "Space") {
-    dispararMissel();
-  }
+  if (e.code === "Space") dispararMissel();
 
   // Pausar jogo
-  if (e.key === 'p' || e.key === 'P') {
-    togglePause();
-  }
+  if (e.key === 'p' || e.key === 'P') togglePause();
 }
 
 function togglePause() {
@@ -102,40 +94,33 @@ function togglePause() {
 }
 
 function dispararMissel() {
-  if (gamePaused) return;
+  if (gamePaused || estadoDisparo === 2) return;
 
   if (estadoDisparo === 0 && !missilEsqAtivo) {
     missilEsqAtivo = true;
-    dispararMissil(rockets.left, alturaDeRepouso, () => {
-      estadoDisparo = 1;
-    });
+    dispararMissil(rockets.left, () => estadoDisparo = 1);
   } else if (estadoDisparo === 1 && !missilDirAtivo) {
     missilDirAtivo = true;
-    dispararMissil(rockets.right, alturaDeRepouso, () => {
-      estadoDisparo = 2;
-    });
-  } else if (estadoDisparo === 2) {
-    resetBothRockets();
-    estadoDisparo = 0;
+    dispararMissil(rockets.right, () => estadoDisparo = 2);
   }
 }
 
-function dispararMissil(missil, alturaInicial, aoFinalizar) {
-  let altura = alturaInicial;
+function dispararMissil(missil, aoFinalizar) {
+  let altura = alturaDeRepouso;
   const intervalo = setInterval(() => {
     if (gamePaused) return;
 
     if (altura >= alturaMaxima) {
       clearInterval(intervalo);
       missil.style.bottom = `${alturaMaxima}vh`;
-      if (typeof aoFinalizar === "function") {
-        aoFinalizar();
-      }
+      if (missil === rockets.left) resetRocket('left');
+      if (missil === rockets.right) resetRocket('right');
+      if (typeof aoFinalizar === "function") aoFinalizar();
     } else {
-      altura += 1;
+      altura += 1.5;
       missil.style.bottom = `${altura}vh`;
       
-      // Verificar colisão com inimigos
+      // Verificar colisão
       const enemies = document.querySelectorAll(".enemy");
       enemies.forEach(enemy => {
         if (checkCollision(missil, enemy)) {
@@ -143,14 +128,8 @@ function dispararMissil(missil, alturaInicial, aoFinalizar) {
           clearInterval(intervalo);
           enemiesKilled++;
           aliensElement.textContent = `ALIEN: ${enemiesKilled}`;
+          resetRocket(missil === rockets.left ? 'left' : 'right');
           checkPhaseProgress();
-          
-          // Resetar o míssil que atingiu
-          if (missil === rockets.left) {
-            resetRocket('left');
-          } else {
-            resetRocket('right');
-          }
         }
       });
     }
@@ -160,36 +139,39 @@ function dispararMissil(missil, alturaInicial, aoFinalizar) {
 function resetRocket(side) {
   if (side === 'left') {
     rockets.left.style.bottom = `${alturaDeRepouso}vh`;
-    rockets.left.style.left = `${posicaoNave + 0.5}%`;
     missilEsqAtivo = false;
   } else {
     rockets.right.style.bottom = `${alturaDeRepouso}vh`;
-    rockets.right.style.left = `${posicaoNave + 5.1}%`;
     missilDirAtivo = false;
   }
-}
-
-function resetBothRockets() {
-  resetRocket('left');
-  resetRocket('right');
+  if (!missilEsqAtivo && !missilDirAtivo) estadoDisparo = 0;
 }
 
 function spawnEnemies() {
   enemiesContainer.innerHTML = '';
+  const containerWidth = window.innerWidth;
+  
+  // Calcula a posição inicial para centralizar o grupo de aliens
+  const startX = (containerWidth - (3 * ENEMY_SPACING - (ENEMY_SPACING - ENEMY_SIZE))) / 2;
+  
   for (let i = 0; i < 3; i++) {
     let enemy = document.createElement("img");
     enemy.src = "images/alien.png";
     enemy.classList.add("enemy");
-    enemy.style.top = "-60px";
-    enemy.style.left = `${30 + i * 100}px`;
+    enemy.style.width = `${ENEMY_SIZE}px`;
+    enemy.style.height = `${ENEMY_SIZE}px`;
+    enemy.style.top = "-100px";
+    enemy.style.left = `${startX + i * ENEMY_SPACING}px`;
     enemiesContainer.appendChild(enemy);
-    moveEnemy(enemy);
+    
+    // Aumenta a velocidade baseada na fase atual
+    const currentSpeed = enemySpeed + (currentPhase * 0.5);
+    moveEnemy(enemy, currentSpeed);
   }
 }
 
-function moveEnemy(enemy) {
-  let top = -60;
-  const speed = enemySpeed + currentPhase * 0.2;
+function moveEnemy(enemy, speed) {
+  let top = -100;
 
   const interval = setInterval(() => {
     if (gamePaused) return;
@@ -197,7 +179,6 @@ function moveEnemy(enemy) {
     top += speed;
     enemy.style.top = `${top}px`;
 
-    // Verificar colisão com o jogador
     if (checkCollision(enemy, player)) {
       clearInterval(interval);
       enemy.remove();
@@ -215,12 +196,10 @@ function moveEnemy(enemy) {
 function checkCollision(el1, el2) {
   const r1 = el1.getBoundingClientRect();
   const r2 = el2.getBoundingClientRect();
-  return (
-    r1.left < r2.right &&
-    r1.right > r2.left &&
-    r1.top < r2.bottom &&
-    r1.bottom > r2.top
-  );
+  return !(r1.right < r2.left || 
+           r1.left > r2.right || 
+           r1.bottom < r2.top || 
+           r1.top > r2.bottom);
 }
 
 function loseLife() {
@@ -231,18 +210,19 @@ function loseLife() {
   messageElement.style.display = "block";
 
   setTimeout(() => {
-    messageElement.style.display = "none";
-    gamePaused = false;
     if (lives <= 0) {
       endGame(false);
     } else {
+      messageElement.style.display = "none";
+      gamePaused = false;
       spawnEnemies();
     }
   }, 2000);
 }
 
 function checkPhaseProgress() {
-  if (enemiesKilled % 3 === 0 && enemiesKilled > 0) {
+  const enemiesRemaining = document.querySelectorAll(".enemy").length;
+  if (enemiesRemaining === 0) {
     if (currentPhase < maxPhases) {
       currentPhase++;
       changeBackground();
@@ -254,7 +234,8 @@ function checkPhaseProgress() {
 }
 
 function changeBackground() {
-  document.body.style.backgroundImage = `url(images/background${currentPhase}.${currentPhase === 1 ? 'png' : 'jpg'})`;
+  document.body.style.backgroundImage = `url('images/background${currentPhase}.jpg')`;
+  console.log(`Mudando para background: images/background${currentPhase}.jpg`);
 }
 
 function endGame(victory) {
@@ -262,4 +243,5 @@ function endGame(victory) {
   messageElement.textContent = victory ? "YOU WIN" : "GAME OVER";
   messageElement.style.display = "block";
   clearInterval(timerInterval);
+  document.removeEventListener('keydown', handleInput);
 }

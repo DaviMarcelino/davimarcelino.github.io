@@ -6,9 +6,12 @@ html, body {
   
   body {
     display: flex;
-    background-image: url(images/background.png);
+    background-image: url('images/background1.jpg');
     background-size: cover;
     background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
   }
   
   main {
@@ -56,6 +59,7 @@ html, body {
     color: white;
     display: none;
     z-index: 20;
+    text-shadow: 2px 2px 4px #000000;
   }
   
   #player {
@@ -94,8 +98,8 @@ html, body {
   
   .enemy {
     position: absolute;
-    width: 60px;
-    height: 60px;
+    width: 90px;
+    height: 90px;
   }
   
   #enemies {
