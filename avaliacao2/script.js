@@ -1,4 +1,3 @@
-// Variáveis globais
 let segundos = 0;
 let timerInterval;
 let gamePaused = false;
@@ -9,12 +8,10 @@ const maxPhases = 4;
 let enemySpeed = 1;
 let enemyInterval;
 
-// Configurações de tamanho
 const PLAYER_SIZE = 100;
 const ENEMY_SIZE = 90;
 const ENEMY_SPACING = 150;
 
-// Elementos DOM
 const timerElement = document.getElementById("timer");
 const lifeElement = document.getElementById("life");
 const aliensElement = document.getElementById("aliens");
@@ -26,13 +23,11 @@ const rockets = {
   right: document.querySelector(".rocketObj.right")
 };
 
-// Configurações de movimento
 const velocidade = 1;
 let posicaoNave = 50;
 const limiteEsquerda = 5;
 const limiteDireita = 95;
 
-// Estados dos mísseis
 let estadoDisparo = 0;
 let missilEsqAtivo = false;
 let missilDirAtivo = false;
@@ -59,14 +54,17 @@ function startTimer() {
 }
 
 function handleInput(e) {
+  if (e.key === 'p' || e.key === 'P') {
+    togglePause();
+    return;
+  }
+  
   if (gamePaused) return;
 
-  // Movimento da nave
   if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
     if (posicaoNave > limiteEsquerda) {
       posicaoNave -= velocidade;
       player.style.left = `${posicaoNave}%`;
-      
       if (!missilEsqAtivo) rockets.left.style.left = `${posicaoNave + 0.5}%`;
       if (!missilDirAtivo) rockets.right.style.left = `${posicaoNave + 5.1}%`;
     }
@@ -74,17 +72,12 @@ function handleInput(e) {
     if (posicaoNave < limiteDireita) {
       posicaoNave += velocidade;
       player.style.left = `${posicaoNave}%`;
-      
       if (!missilEsqAtivo) rockets.left.style.left = `${posicaoNave + 0.5}%`;
       if (!missilDirAtivo) rockets.right.style.left = `${posicaoNave + 5.1}%`;
     }
   }
 
-  // Disparo de mísseis
   if (e.code === "Space") dispararMissel();
-
-  // Pausar jogo
-  if (e.key === 'p' || e.key === 'P') togglePause();
 }
 
 function togglePause() {
@@ -119,8 +112,6 @@ function dispararMissil(missil, aoFinalizar) {
     } else {
       altura += 1.5;
       missil.style.bottom = `${altura}vh`;
-      
-      // Verificar colisão
       const enemies = document.querySelectorAll(".enemy");
       enemies.forEach(enemy => {
         if (checkCollision(missil, enemy)) {
@@ -150,8 +141,6 @@ function resetRocket(side) {
 function spawnEnemies() {
   enemiesContainer.innerHTML = '';
   const containerWidth = window.innerWidth;
-  
-  // Calcula a posição inicial para centralizar o grupo de aliens
   const startX = (containerWidth - (3 * ENEMY_SPACING - (ENEMY_SPACING - ENEMY_SIZE))) / 2;
   
   for (let i = 0; i < 3; i++) {
@@ -163,8 +152,6 @@ function spawnEnemies() {
     enemy.style.top = "-100px";
     enemy.style.left = `${startX + i * ENEMY_SPACING}px`;
     enemiesContainer.appendChild(enemy);
-    
-    // Aumenta a velocidade baseada na fase atual
     const currentSpeed = enemySpeed + (currentPhase * 0.5);
     moveEnemy(enemy, currentSpeed);
   }
@@ -235,7 +222,6 @@ function checkPhaseProgress() {
 
 function changeBackground() {
   document.body.style.backgroundImage = `url('images/background${currentPhase}.jpg')`;
-  console.log(`Mudando para background: images/background${currentPhase}.jpg`);
 }
 
 function endGame(victory) {

@@ -1,109 +1,109 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-  }
-  
-  body {
-    display: flex;
-    background-image: url('images/background1.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-  }
-  
-  main {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-  }
-  
-  .stats {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    display: flex;
-    background-color: black;
-    color: white;
-    border: 2px solid white;
-    width: 200px;
-    height: 200px;
-    font-family: 'Segoe UI', sans-serif;
-    z-index: 10;
-  }
-  
-  .statsleft, .statsright {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    gap: 20px;
-  }
-  
-  .statsimg {
-    width: 40px;
-    height: 40px;
-  }
-  
-  #message {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 50px;
-    font-weight: bold;
-    color: white;
-    display: none;
-    z-index: 20;
-    text-shadow: 2px 2px 4px #000000;
-  }
-  
-  #player {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    width: 80px;
-    height: 90px;
-  }
-  
-  .playerimg {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .rocket {
-    width: 10px;
-    height: 60px;
-  }
-  
-  .rocketObj {
-    position: absolute;
-    bottom: 6vh;
-  }
-  
-  .rocketObj.left {
-    left: 0.5%;
-  }
-  
-  .rocketObj.right {
-    left: 5.1%;
-  }
-  
-  .enemy {
-    position: absolute;
-    width: 90px;
-    height: 90px;
-  }
-  
-  #enemies {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-  }
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  display: flex;
+  background-image: url('images/background1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+main {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.stats {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  background-color: black;
+  color: white;
+  border: 2px solid white;
+  width: 200px;
+  height: 200px;
+  font-family: 'Segoe UI', sans-serif;
+  z-index: 10;
+}
+
+.statsleft, .statsright {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 20px;
+}
+
+.statsimg {
+  width: 40px;
+  height: 40px;
+}
+
+#message {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  font-weight: bold;
+  color: white;
+  display: none;
+  z-index: 20;
+  text-shadow: 2px 2px 4px #000000;
+}
+
+#player {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  width: 80px;
+  height: 90px;
+}
+
+.playerimg {
+  width: 100%;
+  height: 100%;
+}
+
+.rocket {
+  width: 10px;
+  height: 60px;
+}
+
+.rocketObj {
+  position: absolute;
+  bottom: 6vh;
+}
+
+.rocketObj.left {
+  left: 0.5%;
+}
+
+.rocketObj.right {
+  left: 5.1%;
+}
+
+.enemy {
+  position: absolute;
+  width: 90px;
+  height: 90px;
+}
+
+#enemies {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
