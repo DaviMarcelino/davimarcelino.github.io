@@ -1,15 +1,15 @@
-
 function ex01() {
+    const input = document.querySelector('form#form01 input[name="in_01"]').value;
+    const numbers = input.split(' ').map(Number);
     
-    const form = document.querySelector('#form01')
-    const input = form.querySelector('input[name="in_01"]').value
-    alert(input)
-    form.reset()
+    function calculateAverage() {
+        let sum = 0;
+        for (let i = 0; i < arguments.length; i++) {
+            sum += arguments[i];
+        }
+        return sum / arguments.length;
+    }
+    
+    const average = calculateAverage(...numbers);
+    document.getElementById('output').textContent = `Média: ${average.toFixed(2)}`;
 }
-
-function resolve01() {
-
-} 
-
-
-

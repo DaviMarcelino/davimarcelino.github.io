@@ -1,18 +1,10 @@
-
 function ex03() {
+    const input = document.querySelector('form#form03 input[name="in_03"]').value;
+    const numbers = input.split(' ').map(Number);
     
-    const form = document.querySelector('#form03')
-    const input = form.querySelector('input[name="in_03"]').value
-    alert(input)
-    form.reset()
+    const parityCheck = numbers.map(num => {
+        return num % 2 === 0 ? `${num} - PAR` : `${num} - ÍMPAR`;
+    });
+    
+    document.getElementById('output').textContent = parityCheck.join(', ');
 }
-
-function resolve03() {
-
-}
-
-function isEven(val) {
-
-}
-
-
