@@ -21,6 +21,6 @@ function ex04() {
     const perfectNumbers = numbers.filter(isPerfectNumber);
     document.getElementById('output').textContent = 
         perfectNumbers.length > 0 
-            ? `Números perfeitos: ${perfectNumbers.join(', ')}` 
-            : 'Nenhum número perfeito encontrado';
+            ? `Números perfeito!` 
+            : 'Número imperfeito!';
 }

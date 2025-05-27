@@ -8,5 +8,5 @@ function ex02() {
     };
     
     const average = calculateAverage(...numbers);
-    document.getElementById('output').textContent = `Média (Arrow Function): ${average.toFixed(2)}`;
+    document.getElementById('output').textContent = `Média: ${average.toFixed(2)}`;
 }
